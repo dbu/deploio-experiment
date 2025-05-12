@@ -4,7 +4,17 @@ use Imagine\Image\ImageInterface;
 
 require __DIR__.'/../vendor/autoload.php';
 
-$size = filter_input(INPUT_GET, 'size', FILTER_SANITIZE_NUMBER_INT) ?: 200;
+const MIN_SIZE = 20;
+const MAX_SIZE = 2000;
+
+$options = [
+    'options' => [
+        'default' => 200,
+        'min_range' => MIN_SIZE,
+        'max_range' => MAX_SIZE,
+    ],
+];
+$size = filter_input(INPUT_GET, 'size', FILTER_VALIDATE_INT, $options);
 
 $imagine = new Imagine\Gd\Imagine();
 
@@ -35,11 +45,11 @@ $image = $imagine->open(__DIR__.'/../resources/deploio.png')
     It uses the <a href="https://github.com/php-imagine/Imagine" target="_blank"><code>imagine/imagine</code></a> library with the GD PHP extension <code>ext-gd</code> to scale an image to a different size.
     deplo.io uses the <code>composer.json</code> to know that it needs to provide <code>ext-gd</code> and then uses composer to install the dependencies.
 </p>
-<img title="deplo.io logo scaled in PHP" alt="deplo.io" src="data:image/png;base64,<?php echo base64_encode($image) ?>" />
+<img title="deplo.io logo scaled in PHP" alt="deplo.io" src="data:image/png;base64,<?= base64_encode($image) ?>" />
 <p>This image is dynamically scaled with Imagine.
     <form method="get">
         <label for="size">Image size: </label>
-        <input type="number" id="size" name="size" min="20" max="2000" value="<?php echo $size ?>" /> px<br/>
+        <input type="number" id="size" name="size" min="<?= MIN_SIZE ?>" max="<?= MAX_SIZE ?>" value="<?= $size ?>" /> px<br/>
         <input type="submit" value="Scale Image"/>
     </form>
 </p>
