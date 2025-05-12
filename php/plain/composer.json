@@ -1,0 +1,10 @@
+{
+    "name": "deploio-examples/plain-php",
+    "description": "A simple example application to demonstrate deplo.io with PHP.",
+    "type": "project",
+    "require": {
+        "imagine/imagine": "^1.5",
+        "ext-gd": "*"
+    },
+    "license": "proprietary"
+}
