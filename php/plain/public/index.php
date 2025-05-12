@@ -26,10 +26,10 @@ $image = $imagine->open(__DIR__.'/../resources/deploio.png')
 ;
 
 ?>
-<html>
+<html lang="en">
 <head>
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <title>deplo.io plain PHP demo</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <style>
         body {
             margin: 0 auto;
@@ -46,12 +46,13 @@ $image = $imagine->open(__DIR__.'/../resources/deploio.png')
     deplo.io uses the <code>composer.json</code> to know that it needs to provide <code>ext-gd</code> and then uses composer to install the dependencies.
 </p>
 <img title="deplo.io logo scaled in PHP" alt="deplo.io" src="data:image/png;base64,<?= base64_encode($image) ?>" />
-<p>This image is dynamically scaled with Imagine.
-    <form method="get">
-        <label for="size">Image size: </label>
-        <input type="number" id="size" name="size" min="<?= MIN_SIZE ?>" max="<?= MAX_SIZE ?>" value="<?= $size ?>" /> px<br/>
-        <input type="submit" value="Scale Image"/>
-    </form>
+<p>
+    This image is dynamically scaled with Imagine.
 </p>
+<form method="get">
+    <label for="size">Image size (20 - 2000): </label>
+    <input type="number" id="size" name="size" min="<?= MIN_SIZE ?>" max="<?= MAX_SIZE ?>" value="<?= $size ?>" /> px<br/>
+    <input type="submit" value="Scale Image"/>
+</form>
 </body>
 </html>
